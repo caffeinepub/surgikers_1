@@ -259,24 +259,23 @@ export default function HomePage() {
           <div className="mb-6">
             <div
               style={{
-                display: "inline-block",
-                background: "rgba(255,255,255,0.06)",
-                backdropFilter: "blur(8px)",
-                border: "2px solid rgba(147,197,253,0.3)",
-                borderRadius: "24px",
-                padding: "12px",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background:
+                  "radial-gradient(circle, rgba(10,22,40,0.55) 60%, transparent 100%)",
+                borderRadius: "50%",
+                padding: "20px",
+                width: "320px",
+                height: "320px",
                 boxShadow:
-                  "0 0 60px rgba(59,130,246,0.35), 0 0 120px rgba(59,130,246,0.15), inset 0 0 30px rgba(255,255,255,0.04)",
+                  "0 0 80px rgba(59,130,246,0.18), 0 0 160px rgba(59,130,246,0.08)",
               }}
             >
               <img
-                src="/assets/generated/surgikers-logo-transparent.dim_300x300.png"
+                src="/assets/uploads/Surgikers_logo_with_heraldic_shield-removebg-preview-1.png"
                 alt="Surgikers Logo"
-                className="h-52 w-52 object-contain"
-                style={{
-                  filter:
-                    "brightness(0) invert(1) drop-shadow(0 0 16px rgba(147,197,253,0.9)) drop-shadow(0 0 32px rgba(59,130,246,0.6))",
-                }}
+                className="h-72 w-72 object-contain"
               />
             </div>
           </div>

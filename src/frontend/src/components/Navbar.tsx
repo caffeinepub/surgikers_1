@@ -42,7 +42,7 @@ export default function Navbar() {
               style={{ width: "44px", height: "44px", padding: "4px" }}
             >
               <img
-                src="/assets/generated/surgikers-logo-transparent.dim_300x300.png"
+                src="/assets/uploads/Surgikers-logo-with-heraldic-shield-1.png"
                 alt="Surgikers Logo"
                 className="h-9 w-9 object-contain"
               />
