@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 import {
-  Activity,
   Bone,
+  Building2,
   ChevronDown,
-  Hand,
+  Ear,
   Menu,
   Microscope,
+  Package,
   Scissors,
   Stethoscope,
   Syringe,
@@ -16,14 +17,13 @@ import { useState } from "react";
 import { useInternetIdentity } from "../hooks/useInternetIdentity";
 
 const CATEGORIES = [
-  { label: "Cutting Instruments", icon: Syringe },
-  { label: "Scissors", icon: Scissors },
-  { label: "Forceps", icon: Hand },
-  { label: "Needle Holders", icon: Activity },
-  { label: "Retractors", icon: Bone },
-  { label: "Bone Instruments", icon: Bone },
-  { label: "Laparoscopic", icon: Microscope },
-  { label: "Clamps & Specula", icon: Stethoscope },
+  { label: "Dental Instruments", icon: Syringe },
+  { label: "Orthopedic Instruments", icon: Bone },
+  { label: "General Instruments", icon: Scissors },
+  { label: "Laparoscopy Instruments", icon: Microscope },
+  { label: "Hospital Furnitures", icon: Building2 },
+  { label: "Medical Hollowwares", icon: Package },
+  { label: "ENT Instruments", icon: Ear },
 ];
 
 export default function Navbar() {
@@ -53,7 +53,6 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden md:flex items-center gap-1">
-            {/* About Us */}
             <Link
               to="/about"
               data-ocid="nav.link.1"
@@ -79,7 +78,7 @@ export default function Navbar() {
                 />
               </Link>
               <div
-                className="absolute top-full left-0 mt-1 w-56 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0 z-50 py-2"
+                className="absolute top-full left-0 mt-1 w-60 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-1 group-hover:translate-y-0 z-50 py-2"
                 style={{ background: "rgba(10,22,40,0.97)" }}
               >
                 {CATEGORIES.map((cat) => (
@@ -95,7 +94,6 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Blogs */}
             <Link
               to="/blogs"
               data-ocid="nav.link.3"
@@ -104,7 +102,6 @@ export default function Navbar() {
               Blogs
             </Link>
 
-            {/* Contact Us */}
             <Link
               to="/contact"
               data-ocid="nav.link.4"
