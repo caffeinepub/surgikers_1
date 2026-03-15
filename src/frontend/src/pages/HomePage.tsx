@@ -19,6 +19,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import SocialSidebar from "../components/SocialSidebar";
 
 const PRODUCTS = [
   {
@@ -237,6 +238,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background font-body">
       <Navbar />
+
+      {/* Floating Social Sidebar — homepage only */}
+      <SocialSidebar />
 
       {/* HERO */}
       <section
@@ -680,24 +684,26 @@ export default function HomePage() {
                 {
                   icon: MapPin,
                   label: "Address",
-                  value: "123 Medical Hub, Sector 7, New Delhi - 110001, India",
+                  value: "2/C Regent Colony, Kolkata- 700040, West Bengal, IN",
+                  href: "https://www.google.com/maps?q=22.483540003445473,88.35353023518293",
                 },
                 {
                   icon: Phone,
                   label: "Phone",
-                  value: "+91 98765 43210  |  +91 11 2345 6789",
+                  value: "+91 6289916622",
+                  href: "tel:+916289916622",
                 },
                 {
                   icon: Mail,
                   label: "Email",
-                  value: "info@surgikers.com",
-                  href: "mailto:info@surgikers.com",
+                  value: "surgikerspvt.ltd@gmail.com",
+                  href: "mailto:surgikerspvt.ltd@gmail.com",
                 },
                 {
                   icon: MessageCircle,
                   label: "WhatsApp",
-                  value: "+91 98765 43210",
-                  href: "https://wa.me/919876543210",
+                  value: "+91 6289916622",
+                  href: "https://wa.me/916289916622",
                 },
                 {
                   icon: Linkedin,
@@ -714,20 +720,16 @@ export default function HomePage() {
                     <p className="font-body font-semibold text-navy text-sm mb-0.5">
                       {item.label}
                     </p>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-body text-muted-foreground text-sm hover:text-teal transition-colors"
-                      >
-                        {item.value}
-                      </a>
-                    ) : (
-                      <p className="font-body text-muted-foreground text-sm">
-                        {item.value}
-                      </p>
-                    )}
+                    <a
+                      href={item.href}
+                      target={
+                        item.href.startsWith("http") ? "_blank" : undefined
+                      }
+                      rel="noopener noreferrer"
+                      className="font-body text-muted-foreground text-sm hover:text-teal transition-colors"
+                    >
+                      {item.value}
+                    </a>
                   </div>
                 </div>
               ))}
@@ -737,7 +739,7 @@ export default function HomePage() {
               data-ocid="contact.map_marker"
             >
               <iframe
-                src="https://www.openstreetmap.org/export/embed.html?bbox=77.1490%2C28.5739%2C77.2690%2C28.6539&layer=mapnik&marker=28.6139%2C77.2090"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=88.3235%2C22.4635%2C88.3835%2C22.5035&layer=mapnik&marker=22.483540003445473%2C88.35353023518293"
                 width="100%"
                 height="350"
                 style={{ border: 0 }}
