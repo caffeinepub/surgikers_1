@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* OKLCH channel values: L C H */
+    --background: 0.14 0.02 240;
+    --foreground: 0.92 0.01 200;
+
+    --card: 0.16 0.025 240;
+    --card-foreground: 0.92 0.01 200;
+
+    --popover: 0.16 0.025 240;
+    --popover-foreground: 0.92 0.01 200;
+
+    --primary: 0.72 0.12 195;
+    --primary-foreground: 0.14 0.02 240;
+
+    --secondary: 0.22 0.02 240;
+    --secondary-foreground: 0.8 0.01 200;
+
+    --muted: 0.2 0.02 240;
+    --muted-foreground: 0.55 0.01 200;
+
+    --accent: 0.72 0.12 195;
+    --accent-foreground: 0.14 0.02 240;
+
+    --destructive: 0.55 0.2 25;
+    --destructive-foreground: 1.0 0 0;
+
+    --border: 0.28 0.02 240;
+    --input: 0.28 0.02 240;
+    --ring: 0.72 0.12 195;
+
+    /* Brand custom colors */
+    --navy: 0.14 0.02 240;
+    --teal: 0.72 0.12 195;
+    --teal-light: 0.8 0.1 195;
+    --steel: 0.38 0.03 240;
+
+    --radius: 0.75rem;
+
+    /* Chart */
+    --chart-1: 0.72 0.12 195;
+    --chart-2: 0.68 0.11 160;
+    --chart-3: 0.75 0.11 205;
+    --chart-4: 0.7 0.11 225;
+    --chart-5: 0.62 0.1 170;
+
+    /* Sidebar */
+    --sidebar-background: 0.16 0.025 240;
+    --sidebar-foreground: 0.8 0.01 200;
+    --sidebar-primary: 0.72 0.12 195;
+    --sidebar-primary-foreground: 0.14 0.02 240;
+    --sidebar-accent: 0.2 0.02 240;
+    --sidebar-accent-foreground: 0.8 0.01 200;
+    --sidebar-border: 0.28 0.02 240;
+    --sidebar-ring: 0.72 0.12 195;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+}

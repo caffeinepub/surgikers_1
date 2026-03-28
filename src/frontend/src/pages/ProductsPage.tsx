@@ -10,7 +10,10 @@ import {
   Building2,
   ChevronDown,
   ChevronUp,
+  Download,
   Ear,
+  ExternalLink,
+  FileText,
   FilterX,
   MessageCircle,
   Microscope,
@@ -36,7 +39,60 @@ type Category = {
   icon: React.ElementType;
   shortDesc: string;
   products: Product[];
+  pdfUrl?: string;
 };
+
+function PdfPanel({
+  pdfUrl,
+  categoryName,
+}: { pdfUrl?: string; categoryName: string }) {
+  const [hovered, setHovered] = useState(false);
+
+  if (pdfUrl) {
+    return (
+      <div className="w-44 shrink-0 flex flex-col rounded-xl border border-white/20 bg-white/5 overflow-hidden">
+        <button
+          type="button"
+          className="relative cursor-pointer flex-1 w-full text-left bg-transparent border-0 p-0"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onClick={() => window.open(pdfUrl, "_blank")}
+        >
+          <iframe
+            src={`${pdfUrl}#page=1&toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+            title={`${categoryName} catalogue`}
+            className="w-full h-44 rounded-t-xl"
+            style={{ pointerEvents: "none" }}
+          />
+          {hovered && (
+            <div className="absolute inset-0 bg-teal/60 rounded-t-xl flex flex-col items-center justify-center gap-1.5 transition-all">
+              <ExternalLink size={20} className="text-white" />
+              <span className="text-white text-xs font-semibold">Open PDF</span>
+            </div>
+          )}
+        </button>
+        <a
+          href={pdfUrl}
+          download
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center justify-center gap-1.5 py-2 px-3 text-teal text-xs font-semibold border-t border-white/10 hover:bg-teal/10 transition-colors"
+        >
+          <Download size={12} />
+          Download
+        </a>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-44 shrink-0 flex flex-col items-center justify-center rounded-xl border border-white/10 bg-white/5 min-h-[200px] gap-2 p-4">
+      <FileText size={32} className="text-white/30" />
+      <span className="text-white/30 text-xs font-semibold">Catalogue</span>
+      <span className="text-white/20 text-xs">Coming Soon</span>
+    </div>
+  );
+}
 
 const CATEGORIES: Category[] = [
   {
@@ -44,6 +100,8 @@ const CATEGORIES: Category[] = [
     name: "Dental Instruments",
     icon: Syringe,
     shortDesc: "Precision tools for oral surgery and dental procedures",
+    pdfUrl:
+      "/assets/uploads/dental_front_back-019d356a-15fd-701a-8b6b-3d3a4610e083-1.pdf",
     products: [
       {
         name: "Dental Scalers",
@@ -546,7 +604,7 @@ export default function ProductsPage() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6">
                 {filteredCategories.map((cat, catIdx) => {
                   const Icon = cat.icon;
                   const isExpanded = expandedCategories.includes(cat.id);
@@ -568,42 +626,54 @@ export default function ProductsPage() {
                       }`}
                       style={{ background: "rgba(15,25,50,0.7)" }}
                     >
-                      <div className="p-6">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-teal/15 border border-teal/25 flex items-center justify-center shrink-0 group-hover:bg-teal/25 transition-colors">
-                              <Icon size={22} className="text-teal" />
+                      {/* Card top: left content + right PDF panel */}
+                      <div className="p-6 flex gap-5 items-stretch">
+                        {/* Left column */}
+                        <div className="flex-1 min-w-0 flex flex-col">
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="flex items-center gap-4">
+                              <div className="w-12 h-12 rounded-xl bg-teal/15 border border-teal/25 flex items-center justify-center shrink-0 group-hover:bg-teal/25 transition-colors">
+                                <Icon size={22} className="text-teal" />
+                              </div>
+                              <div>
+                                <h3 className="font-display font-bold text-white text-xl leading-tight">
+                                  {cat.name}
+                                </h3>
+                                <p className="text-white/50 text-sm mt-0.5">
+                                  {cat.shortDesc}
+                                </p>
+                              </div>
                             </div>
-                            <div>
-                              <h3 className="font-display font-bold text-white text-xl leading-tight">
-                                {cat.name}
-                              </h3>
-                              <p className="text-white/50 text-sm mt-0.5">
-                                {cat.shortDesc}
-                              </p>
-                            </div>
+                            <Badge className="bg-teal/20 text-teal border border-teal/30 text-xs shrink-0 mt-1">
+                              {cat.products.length} products
+                            </Badge>
                           </div>
-                          <Badge className="bg-teal/20 text-teal border border-teal/30 text-xs shrink-0 mt-1">
-                            {cat.products.length} products
-                          </Badge>
+
+                          <button
+                            type="button"
+                            data-ocid={`products.category.view_button.${originalIndex + 1}`}
+                            onClick={() => toggleExpand(cat.id)}
+                            className="mt-5 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-teal/30 text-teal text-sm font-semibold hover:bg-teal/10 transition-all duration-200"
+                          >
+                            {isExpanded ? (
+                              <>
+                                <ChevronUp size={15} /> Hide Products
+                              </>
+                            ) : (
+                              <>
+                                <ChevronDown size={15} /> View Products
+                              </>
+                            )}
+                          </button>
                         </div>
 
-                        <button
-                          type="button"
-                          data-ocid={`products.category.view_button.${originalIndex + 1}`}
-                          onClick={() => toggleExpand(cat.id)}
-                          className="mt-5 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-teal/30 text-teal text-sm font-semibold hover:bg-teal/10 transition-all duration-200"
-                        >
-                          {isExpanded ? (
-                            <>
-                              <ChevronUp size={15} /> Hide Products
-                            </>
-                          ) : (
-                            <>
-                              <ChevronDown size={15} /> View Products
-                            </>
-                          )}
-                        </button>
+                        {/* Right column: PDF panel */}
+                        <div className="hidden sm:flex">
+                          <PdfPanel
+                            pdfUrl={cat.pdfUrl}
+                            categoryName={cat.name}
+                          />
+                        </div>
                       </div>
 
                       {/* Expanded product sub-grid */}
